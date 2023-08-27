@@ -1,8 +1,7 @@
 # sales_performance_dashboard
 Sales Performance Dashboard with Python and excel
 
-![image](https://github.com/nellytchiengue/sales_performance_dashboard/assets/105495334/fd5241d0-308f-42eb-ba6e-1aa7401e7b2f)
-
+![image](https://github.com/nellytchiengue/sales_performance_dashboard/assets/105495334/c17eea96-c12d-472c-aad0-b56488994203)
 
 The project's purpose is to show how we can build and automate an interactive dashboard with Excel and python.
 
