@@ -1,15 +1,19 @@
 # sales_performance_dashboard
-Sales Performance Dashboard with python and excel
+Sales Performance Dashboard with Python and excel
 
-![image](https://github.com/nellytchiengue/sales_performance_dashboard/assets/105495334/c93201c1-81f2-4412-a8f4-c80d70ab5db5)
+![image](https://github.com/nellytchiengue/sales_performance_dashboard/assets/105495334/fd5241d0-308f-42eb-ba6e-1aa7401e7b2f)
 
 
-The project purpose is to show how we can built and automate an interactive dashboard with excel and python.
+The project's purpose is to show how we can build and automate an interactive dashboard with Excel and python.
 
     Steps:
-    1_ Get data from kaggle CSV file 
+    1_ Get data from a Kaggle CSV file 
     2_ Transform data
-    3_ Create dashboard with data and Excel template
-    4_ Share the report by outlook mail
+    3_ Create a dashboard with data and an Excel template
+    4_ Share the report by Outlook mail
+    Bonus: using .bat file to automate de production of the report
 
-  Bonus: using .bat file to automate de production of report
+SOURCE KAGGLE
+    >> Supermarket sales
+    https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales
+
