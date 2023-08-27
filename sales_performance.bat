@@ -1,3 +1,3 @@
-python sales_performance_local.py
-echo ** Reporting run_report is completed **
+python sales_performance.py
+echo ** Reporting sales_performance is completed **
 pause
