@@ -9,7 +9,7 @@ The project's purpose is to show how we can build and automate an interactive da
     1_ Get data from a Kaggle CSV file 
     2_ Transform data
     3_ Create an interactive dashboard with data and an Excel template
-    4_ Share the report by Outlook mail
+    4_ Share the report via Outlook mail
     Bonus: using .bat file to automate de production of the report 
 
 The project should be run on Windows OS.
