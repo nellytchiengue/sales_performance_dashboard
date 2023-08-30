@@ -15,12 +15,18 @@
     https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales
 
 """
+
+""" Github repo
+sales_performance_dashboard
+
+
+"""
+
 import pandas as pd
 import datetime
 import os
 import openpyxl
 import xlwings as xw
-import win32com
 
 print ("'\nSTART - " + os.path.basename(__file__))
 print( "Date : " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
@@ -33,7 +39,7 @@ today = datetime.date.today()
 fileExtension_name = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 template_filename = "sales_performance"
 data_sheet_name = "data"
-project_folder = "C:\\NELLY\\PROJECTS\\PORTFOLIO\\excel_dashboard\\"
+
 #  def data_processing():
 
 # _________________________________________________
@@ -102,8 +108,6 @@ os.system('move /Y "'+ '*.xls*" "' + 'Archives"' )
 # _________________________________________________
 # EXCEL DASHBOARD CREATION 
 
-print ( "\n>>> EXCEL DASHBOARD CREATION  ")
-
 # with excel template
 #  from def export_dfs_to_excel
 
@@ -112,7 +116,8 @@ print ( "\n>>> EXCEL DASHBOARD CREATION  ")
 
 #  export df to excel template with xlwings module 
 
-wb = xw.Book("template\\" + template_filename + ".xlsx")
+#  open existing excel template
+wb = xw.Book("Template\\" + template_filename + ".xlsx")
 
 # app = xw.apps.active  
 wb.sheets[data_sheet_name].activate()
@@ -128,37 +133,12 @@ wb.sheets[0].activate()
 # save as the excel worbook: a nex file is created
 wb.save(report_file_name)
 
+# update pivot table -> "Refresh All" button
+# Refresh all data connections.
+wb.RefreshAll()
+
 # close the excel workbook
 wb.close()
-
-# _________________________________________________
-# _________________________________________________
-# REFRESH ALL
-# Refresh pivot tables and others objects in excel report
-
-# Funct to refresh all objects in excel
-def refreshAll_excel (file_path_name_folder) :
-
-    print ( "\n>>> START- refreshAll_excel with : ")
-    print (" file_path_name_folder = " + file_path_name_folder )
-    
-    office = win32com.client.Dispatch("Excel.Application")
-    wb = office.Workbooks.Open(file_path_name_folder)
-
-    # Refresh all data connections.
-    wb.RefreshAll()
-    wb.Save()
-    wb.Close()
-
-    # Quit
-    # office.Quit()
-    
-    print ( "\n>>> END- refreshAll_excel ")
-
-# update pivot table -> "Refresh All" button
-# project_folder = "C:\\NELLY\\PROJECTS\\PORTFOLIO\\excel_dashboard\\"
-refreshAll_excel (project_folder + report_file_name )
-
 
 # _________________________________________________
 # _________________________________________________
@@ -202,9 +182,3 @@ displayEmail (project_folder + "template\\" + emailTemplateName , attachmentPath
 ##################################################################################
 print ("'\nEND  - " + os.path.basename(__file__))
 print( "Date : " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-
-
-
-
-
-
