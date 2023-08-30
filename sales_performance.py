@@ -15,12 +15,12 @@
     https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales
 
 """
-
 import pandas as pd
 import datetime
 import os
 import openpyxl
 import xlwings as xw
+import win32com
 
 print ("'\nSTART - " + os.path.basename(__file__))
 print( "Date : " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
@@ -33,7 +33,7 @@ today = datetime.date.today()
 fileExtension_name = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 template_filename = "sales_performance"
 data_sheet_name = "data"
-
+project_folder = "C:\\NELLY\\PROJECTS\\PORTFOLIO\\excel_dashboard\\"
 #  def data_processing():
 
 # _________________________________________________
@@ -102,6 +102,8 @@ os.system('move /Y "'+ '*.xls*" "' + 'Archives"' )
 # _________________________________________________
 # EXCEL DASHBOARD CREATION 
 
+print ( "\n>>> EXCEL DASHBOARD CREATION  ")
+
 # with excel template
 #  from def export_dfs_to_excel
 
@@ -110,7 +112,7 @@ os.system('move /Y "'+ '*.xls*" "' + 'Archives"' )
 
 #  export df to excel template with xlwings module 
 
-wb = xw.Book("Template\\" + template_filename + ".xlsx")
+wb = xw.Book("template\\" + template_filename + ".xlsx")
 
 # app = xw.apps.active  
 wb.sheets[data_sheet_name].activate()
@@ -126,12 +128,36 @@ wb.sheets[0].activate()
 # save as the excel worbook: a nex file is created
 wb.save(report_file_name)
 
-# update pivot table -> "Refresh All" button
-# Refresh all data connections.
-wb.RefreshAll()
-
 # close the excel workbook
 wb.close()
+
+# _________________________________________________
+# _________________________________________________
+# REFRESH ALL
+# Refresh pivot tables and others objects in excel report
+
+# Funct to refresh all objects in excel
+def refreshAll_excel (file_path_name_folder) :
+
+    print ( "\n>>> START- refreshAll_excel with : ")
+    print (" file_path_name_folder = " + file_path_name_folder )
+    
+    office = win32com.client.Dispatch("Excel.Application")
+    wb = office.Workbooks.Open(file_path_name_folder)
+
+    # Refresh all data connections.
+    wb.RefreshAll()
+    wb.Save()
+    wb.Close()
+
+    # Quit
+    # office.Quit()
+    
+    print ( "\n>>> END- refreshAll_excel ")
+
+# update pivot table -> "Refresh All" button
+# project_folder = "C:\\NELLY\\PROJECTS\\PORTFOLIO\\excel_dashboard\\"
+refreshAll_excel (project_folder + report_file_name )
 
 
 # _________________________________________________
@@ -145,13 +171,16 @@ import win32com.client
 def displayEmail (email_template_path, attachmentPaths):
 
     print ( "\n>>> START- displayEmail ")
-    
+
+    # Create an email message from .oft template
     obj = win32com.client.Dispatch("Outlook.Application")
     report_mail = obj.CreateItemFromTemplate (email_template_path)
+    report_mail.display()
 
-    for attachement in attachmentPaths :
-        print ("attachement = "+ attachement)
-        report_mail.Attachments.Add(Source=attachement)
+    # Add attachments
+    for attachment in attachmentPaths :
+        print ("attachment = "+ attachment)
+        report_mail.Attachments.Add(Source=attachment)
     
     # open the mail
     report_mail.display()
@@ -162,16 +191,18 @@ def displayEmail (email_template_path, attachmentPaths):
     print ( "\n>>> END - displayEmail ")
 
 # the list of files to attached into email
-attachment_files = list() 
-attachment_files.append( report_file_name + ".xlsx") 
 
-# an oft template should be created before and save in "Template" folder
+attachment_files = list() 
+attachment_files.append( project_folder + report_file_name ) 
+
+# an oft template should be created before and save in "template" folder
 emailTemplateName = "sales_performance.oft"
-displayEmail ( "Template\\" + emailTemplateName , attachmentPaths = attachment_files)   
+displayEmail (project_folder + "template\\" + emailTemplateName , attachmentPaths = attachment_files)   
 
 ##################################################################################
 print ("'\nEND  - " + os.path.basename(__file__))
 print( "Date : " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+
 
 
 
