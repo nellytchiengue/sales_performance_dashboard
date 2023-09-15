@@ -18,3 +18,5 @@ SOURCE KAGGLE
     >> Supermarket sales
     https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales
 
+Full Description in Medium article:
+https://medium.com/@nellytchiengue/interactive-excel-dashboard-and-how-to-automate-with-python-a-beginners-guide-5d760307ca67
